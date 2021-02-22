@@ -5,11 +5,17 @@ function formatData(data, id = '') {
 }
 
 const afterController = {
-    async getCars(_, execResult) {
-        await appendFile("./logs/cars.log", `cars was getting successfully, quantity of cars - ${execResult.length} \n`)
+    async getCars(params, execResult, raw) {
+        await appendFile("./logs/cars.log", `try to get cars, quantity of cars - ${execResult.length} : ${Date.now()}\n`)
+    },
+    async getCarById(_, execResult) {
+        await appendFile("./logs/cars.log", `try to get car from DB - ${JSON.stringify(execResult)} \n`)
     },
     async getUsers(_, execResult) {
-        await appendFile("./logs/users.log", `Users was getting successfully, quantity of users ${execResult.length} \n`)
+        await appendFile("./logs/users.log", `try to get users, quantity of users ${execResult.length} \n`)
+    },
+    async getUserById(_, execResult) {
+        await appendFile("./logs/users.log", `try to get user from DB - ${JSON.stringify(execResult)} \n`)
     },
     async setUser(params, execResult) {
         if (execResult) {
@@ -17,10 +23,9 @@ const afterController = {
         } else {
             await appendFile("./logs/users.log", `ERROR - User - ${JSON.stringify(params)} was not set \n`)
         }
-
     },
     async setCar(execResult) {
-        await appendFile("users.log", formatData(execResult, "Car was set"))
+        await appendFile("./logs/cars.log", formatData(execResult, "Car was set"))
     }
 }
 module.exports = {afterController}

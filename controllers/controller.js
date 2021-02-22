@@ -4,7 +4,12 @@ const Car = require('../models/car')
 const controller = {
     async getCars() {
         try {
-            return await Car.find()
+            const cars = await Car.find()
+            if (cars.length) {
+                return cars
+            } else {
+                return {"info" : "Cars not found at DB"}
+            }
         } catch (e) {
             console.log(e)
         }
@@ -18,14 +23,24 @@ const controller = {
     },
     async getUsers() {
         try {
-            return await User.find().populate('car')
+            const users = await User.find().populate('car')
+            if(users.length){
+                return users
+            } else {
+                return {"info" : "Users not found at DB"}
+            }
         } catch (e) {
             console.log(e)
         }
     },
     async getUserById({_id}) {
         try {
-            return await User.findById(_id).populate('car')
+            const user = await User.findById(_id).populate('car')
+            if(user) {
+                return user
+            } else {
+                return {"result" : "User not found at DB"}
+            }
         } catch (e) {
             console.log(e)
         }
