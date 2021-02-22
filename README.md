@@ -19,11 +19,11 @@ User {name: , surname: , password: , car: {_id: }
 "jsonrpc": "2.0", 
 "method": "getCarById",
 "params": {
-    "_id": "6033c3d9f626cf0243fcf1fb" // _Car id we can get with_ **getCars** request
+    "_id": "6033c3d9f626cf0243fcf1fb"
 }, 
 "id": 1
 }`
-
+// _Car id we can get with_ **getCars** request
 
 
 getUsers
