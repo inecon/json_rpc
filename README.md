@@ -32,7 +32,7 @@ User {name: , surname: , password: , car: {_id: }
 "id": 3
 }`
 
-**getUserById** - _get Car from DB_
+**getUserById** - _get User from DB_
 `{
 "jsonrpc": "2.0", 
 "method": "getUserById",

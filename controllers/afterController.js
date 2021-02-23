@@ -17,6 +17,9 @@ const afterController = {
     async getUserById(_, execResult) {
         await appendFile("./logs/users.log", `try to get user from DB - ${JSON.stringify(execResult)} \n`)
     },
+    async removeUserById(_, execResult) {
+        await appendFile("./logs/users.log", formatData(execResult, "User deleted -"))
+    },
     async setUser(params, execResult) {
         if (execResult) {
             await appendFile("./logs/users.log", formatData(execResult, "User was set"))
@@ -24,8 +27,11 @@ const afterController = {
             await appendFile("./logs/users.log", `ERROR - User - ${JSON.stringify(params)} was not set \n`)
         }
     },
-    async setCar(execResult) {
+    async setCar(_, execResult) {
         await appendFile("./logs/cars.log", formatData(execResult, "Car was set"))
-    }
+    },
+    async removeCarById(_, execResult) {
+        await appendFile("./logs/cars.log", formatData(execResult, "TCar deleted -"))
+    },
 }
 module.exports = {afterController}

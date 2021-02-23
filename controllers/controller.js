@@ -5,18 +5,23 @@ const controller = {
     async getCars() {
         try {
             const cars = await Car.find()
-            if (cars.length) {
-                return cars
-            } else {
-                return {"info" : "Cars not found at DB"}
-            }
+            return cars.length ? cars : {"info": "Cars not found at DB"}
         } catch (e) {
             console.log(e)
         }
     },
     async getCarById({_id}) {
         try {
-            return await Car.findById(_id)
+            const car = await Car.findById(_id)
+            return car ? car : {"info": "Car not found at DB"}
+        } catch (e) {
+            console.log(e)
+        }
+    },
+    async removeCarById({_id}) {
+        try {
+            const deletedCar = await Car.findByIdAndDelete(_id)
+            return deletedCar ? deletedCar : {"info": "Car not found at DB"}
         } catch (e) {
             console.log(e)
         }
@@ -24,11 +29,7 @@ const controller = {
     async getUsers() {
         try {
             const users = await User.find().populate('car')
-            if(users.length){
-                return users
-            } else {
-                return {"info" : "Users not found at DB"}
-            }
+            return users.length ? users : {"info": "Users not found at DB"}
         } catch (e) {
             console.log(e)
         }
@@ -36,11 +37,15 @@ const controller = {
     async getUserById({_id}) {
         try {
             const user = await User.findById(_id).populate('car')
-            if(user) {
-                return user
-            } else {
-                return {"result" : "User not found at DB"}
-            }
+            return user ? user : {"result": "User not found at DB"}
+        } catch (e) {
+            console.log(e)
+        }
+    },
+    async removeUserById({_id}) {
+        try {
+            const deletedUser = await User.findByIdAndDelete(_id)
+            return deletedUser ? deletedUser : {"info": "User not found at DB"}
         } catch (e) {
             console.log(e)
         }
