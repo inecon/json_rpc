@@ -70,3 +70,22 @@ User {name: , surname: , password: , car: {_id: }
 "id": 1
 }`
 
+**removeUserById** _remove User from DB by ID_
+`{
+"jsonrpc": "2.0", 
+"method": "removeUserById",
+"params": {
+    "_id": "6034ffde4421d012b31898ad"
+}, 
+"id": 3
+}`
+
+**removeCarById** _remove Car from DB by ID_
+`{
+"jsonrpc": "2.0", 
+"method": "removeCarById",
+"params": {
+    "_id": "603500244421d012b31898ae"
+}, 
+"id": 3
+}`
