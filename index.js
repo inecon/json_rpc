@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 const app = require('express')()
 const mongoose = require('mongoose')
@@ -15,7 +14,7 @@ app.use(jsonRouter({
     beforeMethods: beforeController,
     afterMethods: afterController,
     onError(e) {
-        console.log('Omg error occurred!', e)
+        console.log('Something went wrong - error occurred!', e)
     }
 }))
 const PORT = process.env.PORT || 3000
