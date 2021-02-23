@@ -1,6 +1,6 @@
 This is a simple example of API server using NodeJS with Express, JSON-RPC 2.0, MongoDB
 
-**Used 2 entity User and Car located at models directory**
+**Here 2 entity User and Car located at models directory**
 
 Car { brand: , model: , color: }
 User {name: , surname: , password: , car: {_id: }
@@ -43,6 +43,30 @@ User {name: , surname: , password: , car: {_id: }
 }`
 // _User id we can get with_ **getUsers** method
 
-setCar
-setUser
+**setCar** - _set Car to DB_
+`{
+"jsonrpc": "2.0", 
+"method": "setCar", 
+"params": {
+    "brand": "Fiat",
+    "model" : "Punto",
+    "color" : "Green"
+}, 
+"id": 1
+}`
+
+**setUser** - _set User to DB_
+`{
+"jsonrpc": "2.0", 
+"method": "setUser", 
+"params": {
+    "name": "Nikita",
+    "surname" : "proger",
+    "password" : 234566,
+    "car": {
+        "_id": "6033bed066ff1e0116100553"
+    }
+}, 
+"id": 1
+}`
 
