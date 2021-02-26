@@ -64,11 +64,9 @@ const controller = {
             if (savedCar) {
                 const user = new User({name, surname, password, car: savedCar._id})
                 return await user.save()
-            } else {
-                throw new Error(`There no car with id ${car._id}`)
             }
-        } catch
-            (e) {
+            throw new Error(`There no car with id ${car._id}`)
+        } catch (e) {
             console.log(e)
         }
     }

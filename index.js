@@ -4,9 +4,9 @@ const app = require('express')()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const jsonRouter = require('express-json-rpc-router')
-const {controller} = require('./controllers/controller')
-const {beforeController} = require('./controllers/beforeController')
-const {afterController} = require('./controllers/afterController')
+const {controller} = require('./src/controllers/controller')
+const {beforeController} = require('./src/controllers/beforeController')
+const {afterController} = require('./src/controllers/afterController')
 
 app.use(bodyParser.json())
 app.use(jsonRouter({
