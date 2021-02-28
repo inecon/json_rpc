@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const log4js = require('./src/utils/logger')
 const app = require('express')()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
@@ -7,6 +7,7 @@ const jsonRouter = require('express-json-rpc-router')
 const {controller} = require('./src/controllers/controller')
 const {beforeController} = require('./src/controllers/beforeController')
 const {afterController} = require('./src/controllers/afterController')
+const logger = log4js.getLogger();
 
 app.use(bodyParser.json())
 app.use(jsonRouter({
@@ -14,7 +15,7 @@ app.use(jsonRouter({
     beforeMethods: beforeController,
     afterMethods: afterController,
     onError(e) {
-        console.log('Something went wrong - error occurred!', e)
+        logger.error('Something went wrong - error occurred!', e)
     }
 }))
 const PORT = process.env.PORT || 3000
