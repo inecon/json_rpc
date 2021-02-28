@@ -5,7 +5,7 @@ const carSchema = new Schema({
         type: String,
         required: true
     },
-    model : {
+    model: {
         type: String,
         required: true
     },

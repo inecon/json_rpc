@@ -46,6 +46,7 @@ User {name: , surname: , password: , car: {_id: }
 }, 
 "id": 3
 }`
+
 **setUser** - _set User to DB_
 `{
 "jsonrpc": "2.0", 

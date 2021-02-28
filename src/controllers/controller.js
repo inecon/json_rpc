@@ -1,8 +1,7 @@
 const mapperToResponse = require('../utils/mapper')
-const log4js = require('../utils/logger')
 const User = require('../models/user')
 const Car = require('../models/car')
-const logger = log4js.getLogger();
+
 const controller = {
     async setCar({brand, model, color}) {
         try {
