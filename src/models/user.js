@@ -13,10 +13,12 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    car: {
-        type: Schema.Types.ObjectId,
-        ref: 'Car'
-    }
+    cars: [{
+        car: {
+            type: Schema.Types.ObjectId,
+            ref: 'Car'
+        }
+    }]
 })
 
 module.exports = model('User', userSchema)
