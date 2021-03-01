@@ -83,16 +83,16 @@ const controller = {
         let savedCars = []
         try {
             for (const car of cars) {
-               savedCars.push(await Car.findById(car._id))
+                const findedCar = await Car.findById(car._id)
+                findedCar ? savedCars.push(findedCar) : null
             }
-            let ids = savedCars.map(o => {
-                return {
-                    ...o._doc._id
-                }
-            })
-            if (savedCars) {
+            if (savedCars.length) {
+                let ids = savedCars.map(o => {
+                    return {
+                        ...o._id
+                    }
+                })
                 const user = new User({name, surname, password, cars : ids})
-                console.log(user)
                 let result = await user.save()
                 return mapperToResponse({
                     data: result,
@@ -100,9 +100,8 @@ const controller = {
                     message: result ? '' : "User not saved to DB"
                 })
             }
-            throw new Error(`There no car with id ${savedCar._id}, enter valid Car ID`)
+            throw new Error(`There no cars with ids, enter valid Car ID`)
         } catch (e) {
-            console.log(e)
             return mapperToResponse({
                 error: true,
                 message: e.toString()
