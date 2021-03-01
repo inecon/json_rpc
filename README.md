@@ -90,4 +90,4 @@ User {name: , surname: , password: , car: {_id: }
 "id": 3
 }`
 
-Postman collection with requests examples - `https://www.getpostman.com/collections/34f13dd00bf7fe1a9374`
+Postman collection with requests examples - [https://www.getpostman.com/collections/34f13dd00bf7fe1a9374]
