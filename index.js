@@ -4,9 +4,9 @@ const app = require('express')()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const jsonRouter = require('express-json-rpc-router')
-const {controller} = require('./src/controllers/controller')
-const {beforeController} = require('./src/controllers/beforeController')
-const {afterController} = require('./src/controllers/afterController')
+const controller = require('./src/controllers/controller')
+const beforeController = require('./src/controllers/beforeController')
+const afterController = require('./src/controllers/afterController')
 const logger = log4js.getLogger();
 
 app.use(bodyParser.json())

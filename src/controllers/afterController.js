@@ -28,4 +28,4 @@ const afterController = {
         await user_logger.debug(`try to delete user from DB by ID - "${params._id}" -  ${JSON.stringify(execResult)}`)
     },
 }
-module.exports = {afterController}
+module.exports = afterController
