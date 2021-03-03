@@ -50,19 +50,25 @@ const controller = {
         }
     },
     async getCarsByUserId({_id}) {
-        // try {
-        //     const car = await Car.findById(_id)
-        //     return mapperToResponse({
-        //         data: car,
-        //         error: !car,
-        //         message: car ? '' : 'Car not found at DB'
-        //     })
-        // } catch (e) {
-        //     return mapperToResponse({
-        //         error: true,
-        //         message: e.toString()
-        //     })
-        // }
+        try {
+            const carsIds = (await User.findById(_id)).cars
+            let cars = []
+            if (carsIds) {
+                for (const car of carsIds) {
+                    cars.push(await Car.findById(car._id))
+                }
+            }
+            return mapperToResponse({
+                data: cars,
+                error: !cars,
+                message: cars ? '' : 'Cars not found at DB'
+            })
+        } catch (e) {
+            return mapperToResponse({
+                error: true,
+                message: e.toString()
+            })
+        }
     },
     async removeCarById({_id}) {
         try {
@@ -84,23 +90,18 @@ const controller = {
         try {
             for (const car of cars) {
                 const findedCar = await Car.findById(car._id)
-                findedCar ? savedCars.push(findedCar) : null
+                if (findedCar) {
+                    savedCars.push(findedCar)
+                }
             }
-            if (savedCars.length) {
-                let ids = savedCars.map(o => {
-                    return {
-                        ...o._id
-                    }
-                })
-                const user = new User({name, surname, password, cars : ids})
-                let result = await user.save()
-                return mapperToResponse({
-                    data: result,
-                    error: !result,
-                    message: result ? '' : "User not saved to DB"
-                })
-            }
-            throw new Error(`There no cars with ids, enter valid Car ID`)
+            let ids = savedCars.map(({_id}) => ({_id}))
+            const user = new User({name, surname, password, cars: ids})
+            let result = await user.save()
+            return mapperToResponse({
+                data: result,
+                error: !result,
+                message: result ? '' : "User not saved to DB"
+            })
         } catch (e) {
             return mapperToResponse({
                 error: true,
@@ -126,6 +127,21 @@ const controller = {
     async getUserById({_id}) {
         try {
             const user = await User.findById(_id).populate('car')
+            return mapperToResponse({
+                data: user,
+                error: !user,
+                message: user ? '' : 'User not found at DB'
+            })
+        } catch (e) {
+            return mapperToResponse({
+                error: true,
+                message: e.toString()
+            })
+        }
+    },
+    async getUsersByCarId({_id}) {
+        try {
+            const user = await User.find({"cars" : {$elemMatch: {"_id" : `${_id}`}}})
             return mapperToResponse({
                 data: user,
                 error: !user,
