@@ -141,11 +141,11 @@ const controller = {
     },
     async getUsersByCarId({_id}) {
         try {
-            const user = await User.find({"cars" : {$elemMatch: {"_id" : `${_id}`}}})
+            const user = await User.find({"cars": {$elemMatch: {"_id": `${_id}`}}})
             return mapperToResponse({
                 data: user,
-                error: !user,
-                message: user ? '' : 'User not found at DB'
+                error: !user.length,
+                message: user.length ? '' : `Users which contains car with ID - ${_id} not found`
             })
         } catch (e) {
             return mapperToResponse({
@@ -169,7 +169,6 @@ const controller = {
             })
         }
     },
-
 }
 
 module.exports = controller

@@ -12,6 +12,9 @@ const afterController = {
     async getCarById(params, execResult) {
         await car_logger.debug(`try to get car from DB by ID - "${params._id}" - ${JSON.stringify(execResult)}`)
     },
+    async getCarsByUserId(params, execResult) {
+        await car_logger.debug(`try to get cars from DB by UserID - "${params._id}" - ${JSON.stringify(execResult)}`)
+    },
     async removeCarById(params, execResult) {
         await car_logger.debug(`try to delete car from DB by ID - "${params._id}" -  ${JSON.stringify(execResult)}`)
     },
@@ -23,6 +26,9 @@ const afterController = {
     },
     async getUserById(params, execResult) {
         await user_logger.debug(`try to get user from DB by ID - "${params._id}" - ${JSON.stringify(execResult)}`)
+    },
+    async getUsersByCarId(params, execResult) {
+        await user_logger.debug(`try to get users from DB by CarID - "${params._id}" - ${JSON.stringify(execResult)}`)
     },
     async removeUserById(params, execResult) {
         await user_logger.debug(`try to delete user from DB by ID - "${params._id}" -  ${JSON.stringify(execResult)}`)
