@@ -67,8 +67,7 @@ const beforeController = {
                     throw error
                 }
             }
-            let ids = savedCars.map(({_id}) => ({_id}))
-            raw.ids = ids
+            raw.ids = savedCars.map(({_id}) => ({_id}))
         }
     }
 }
