@@ -15,7 +15,7 @@ app.use(jsonRouter({
     beforeMethods: beforeController,
     afterMethods: afterController,
     onError(e) {
-        logger.error('Something went wrong - error occurred!', e)
+        logger.error('Something went wrong - error occurred!', e.toString())
     }
 }))
 const PORT = process.env.PORT || 3000

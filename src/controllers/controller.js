@@ -85,17 +85,9 @@ const controller = {
             })
         }
     },
-    async setUser({name, surname, password, cars}) {
-        let savedCars = []
+    async setUser({name, surname, password, cars = []}, raw) {
         try {
-            for (const car of cars) {
-                const findedCar = await Car.findById(car._id)
-                if (findedCar) {
-                    savedCars.push(findedCar)
-                }
-            }
-            let ids = savedCars.map(({_id}) => ({_id}))
-            const user = new User({name, surname, password, cars: ids})
+            const user = new User({name, surname, password, cars: raw.ids})
             let result = await user.save()
             return mapperToResponse({
                 data: result,
