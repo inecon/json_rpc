@@ -2,7 +2,7 @@ const mapperToResponse = require('../utils/mapper')
 const User = require('../models/user')
 const Car = require('../models/car')
 
-const controller = {
+const carController = {
     async setCar({brand, model, color}) {
         try {
             const car = new Car({brand, model, color})
@@ -163,4 +163,4 @@ const controller = {
     },
 }
 
-module.exports = controller
+module.exports = carController

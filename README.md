@@ -5,7 +5,7 @@ This is a simple example of API server using NodeJS with Express, JSON-RPC 2.0, 
 Car { brand: , model: , color: }
 User {name: , surname: , password: , car: {_id: }
 
-**METHODS located at controllers/controller directory** :
+**METHODS located at controllers/carController directory** :
 
 **setCar** - _set Car to DB_
 `{
