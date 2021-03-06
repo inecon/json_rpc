@@ -34,18 +34,6 @@ const beforeController = {
             throw new Error(errors.toString())
         }
     },
-    async getUsersByCarId(params) {
-        const errors = validation(params, getByIdRule);
-        if (errors.length) {
-            throw new Error(errors.toString())
-        }
-        const car = await Car.findById(params._id)
-        if (!car) {
-            const error = new Error(`Car with ID = ${params._id} not found`)
-            error.data = {params}
-            throw error
-        }
-    },
     async setUser(params, _, raw) {
         const errors = validation(params, setUserRule);
         if (errors.length) {
@@ -68,6 +56,30 @@ const beforeController = {
                 }
             }
             raw.ids = savedCars.map(({_id}) => ({_id}))
+        }
+    },
+    async getUsersByCarId(params) {
+        const errors = validation(params, getByIdRule);
+        if (errors.length) {
+            throw new Error(errors.toString())
+        }
+        const car = await Car.findById(params._id)
+        if (!car) {
+            const error = new Error(`Car with ID = ${params._id} not found`)
+            error.data = {params}
+            throw error
+        }
+    },
+    async getUserById(params) {
+        const errors = validation(params, getByIdRule);
+        if (errors.length) {
+            throw new Error(errors.toString())
+        }
+    },
+    async removeUserById (params){
+        const errors = validation(params, getByIdRule);
+        if (errors.length) {
+            throw new Error(errors.toString())
         }
     }
 }
