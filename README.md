@@ -37,6 +37,14 @@ User {name: , surname: , password: , car: {_id: }
 }`
 // _Car id we can get with_ **getCars** method
 
+**getCarsByUserId**
+`{"jsonrpc": "2.0", 
+ "method": "getCarsByUserId",
+ "params": {
+     "_id": "603e3aaf2be2819bb224f2be"
+ }, 
+ "id": 3}`
+
 **removeCarById** _remove Car from DB by ID_
 `{
 "jsonrpc": "2.0", 
@@ -79,6 +87,15 @@ User {name: , surname: , password: , car: {_id: }
 "id": 1
 }`
 // _User id we can get with_ **getUsers** method
+
+**getUsersByCarId**
+`
+{"jsonrpc": "2.0", 
+"method": "getUsersByCarId",
+"params": {
+    "_id": "603d2302e9a108866ef67465"
+}, 
+"id": 3}`
 
 **removeUserById** _remove User from DB by ID_
 `{
