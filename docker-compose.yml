@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    command: node index.js
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - json-app
+  mongo:
+    container_name: mongo
+    hostname: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    networks:
+      - json-app
+networks:
+  json-app:
+    driver: bridge
+volumes:
+  data:
