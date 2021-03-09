@@ -10,6 +10,7 @@ const generateErrorMessage = (name, description) => `Field => ${name} <= ${descr
 function isRequired({ field = '', name }) {
   // eslint-disable-next-line no-unused-expressions
   typeof field === 'number' ? field = field.toString() : field;
+  // TODO check value with == NULL, make new var, check if present
   if (!field.length) {
     return generateErrorMessage(name, 'is required');
   }
@@ -25,8 +26,10 @@ function maxLength({ field = '', name, params: { maxLimit } }) {
 
 function minMax({ field, name, params: { min = 0, max = 100 } }) {
   // eslint-disable-next-line no-unused-expressions
+  // TODO fix this
   typeof field === 'number' ? field = field.toString() : field;
   if (field === undefined) {
+    // TODO fix this
     return null;
   } if (field.length < min || field.length > max) {
     return generateErrorMessage(name, `must be between ${min} and ${max}`);
@@ -35,6 +38,7 @@ function minMax({ field, name, params: { min = 0, max = 100 } }) {
 }
 
 function isArray({ field = '', name }) {
+  // TODO fix this
   if (!(typeof field === 'object')) {
     return null;
   } if (!Array.isArray(field)) {

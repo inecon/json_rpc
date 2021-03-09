@@ -86,7 +86,7 @@ const controller = {
     }
   },
   async setUser({
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars //TODO fix
     name, surname, password, cars = [],
   }, raw) {
     try {

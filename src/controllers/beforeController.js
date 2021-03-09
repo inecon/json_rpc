@@ -6,6 +6,7 @@ const { setCarRule, getByIdRule, setUserRule } = require('../utils/validation/ru
 const beforeController = {
   async setCar(params) {
     const errors = validation(params, setCarRule);
+    // TODO вынести в хелпер метод
     if (errors.length) {
       throw new Error(errors.toString());
     }

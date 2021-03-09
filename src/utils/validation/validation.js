@@ -11,17 +11,20 @@ function validation(data, rules = []) {
     config.forEach((validation) => {
       const key = typeof validation === 'string' ? validation : validation.type;
 
-      const checker = validations[key];
-      if (!checker) {
-        logger.error(`Rule ${key} wasn't found`);
-        return;
-      }
+      // TODO убрать это заменить ошибкой
+      // const checker = validations[key];
+      // if (!checker) {
+      //   logger.error(`Rule ${key} wasn't found`);
+      //   return;
+      // }
+      // TODO чекер сделать возвращение результат и параметры и сделать выход при первой ошибки
       const error = checker({
         field,
         name,
         ...(validation.params && { params: validation.params }),
       });
       // eslint-disable-next-line no-unused-expressions
+      // TODO мутирование исправить пуш
       error && errors.push(error);
     });
   });
