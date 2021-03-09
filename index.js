@@ -1,6 +1,7 @@
 require('dotenv').config();
 const app = require('express')();
 const helmet = require('helmet');
+const compression = require('compression');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jsonRouter = require('express-json-rpc-router');
@@ -11,6 +12,7 @@ const afterController = require('./src/controllers/afterController');
 
 const logger = log4js.getLogger();
 app.use(helmet());
+app.use(compression());
 app.use(bodyParser.json());
 app.use(jsonRouter({
   methods: controller,
