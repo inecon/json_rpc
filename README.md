@@ -1,9 +1,9 @@
 This is a simple example of API server using NodeJS with Express, JSON-RPC 2.0, MongoDB
 
-**Run project with docker-compose **
+**Run project with docker-compose**
 `docker-compose up`
 
-**Stop project with docker-compose **
+**Stop project with docker-compose**
 `docker-compose down `
 
 **Here 2 entity User and Car located at models directory**
