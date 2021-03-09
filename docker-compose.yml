@@ -6,20 +6,44 @@ services:
     command: node index.js
     ports:
       - "3000:3000"
-    links:
-      - mongo
+    depends_on:
+      - db
     volumes:
       - .:/usr/src/app
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=mongo
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
     networks:
       - json-app
-  mongo:
+  db:
+    image: mongo:latest
+    restart: always
     container_name: mongo
     hostname: mongo
-    image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
       - data:/data/db
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+    networks:
+      - json-app
+  mongo-seed:
+    container_name: mongo_seed
+    build: ./mongo-seed
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGO_DB
+    depends_on:
+      - db
     networks:
       - json-app
 networks:

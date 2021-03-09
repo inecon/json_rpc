@@ -1,0 +1,17 @@
+[
+  {
+    "brand": "Ford",
+    "model": "Fiesta",
+    "color": "red"
+  },
+  {
+    "brand": "Fiat",
+    "model": "Punto",
+    "color": "blue"
+  },
+  {
+    "brand": "Lamborgini",
+    "model": "Galardo",
+    "color": "White"
+  }
+]
