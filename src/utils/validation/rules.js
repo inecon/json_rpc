@@ -5,6 +5,7 @@ const setCarRule = [
     name: 'brand',
     rules: [
       TYPES.isRequired,
+      TYPES.isString,
       {
         type: TYPES.minMax,
         params: {
@@ -18,6 +19,7 @@ const setCarRule = [
     name: 'model',
     rules: [
       TYPES.isRequired,
+      TYPES.isString,
       {
         type: TYPES.minMax,
         params: {
@@ -31,6 +33,7 @@ const setCarRule = [
     name: 'color',
     rules: [
       TYPES.isRequired,
+      TYPES.isString,
       {
         type: TYPES.minMax,
         params: {
@@ -43,7 +46,7 @@ const setCarRule = [
 ];
 const getByIdRule = [
   {
-    name: '_id',
+    name: 'id',
     rules: [
       TYPES.isRequired,
       {
@@ -57,6 +60,7 @@ const setUserRule = [
     name: 'name',
     rules: [
       TYPES.isRequired,
+      TYPES.isString,
       {
         type: TYPES.minMax,
         params: {
@@ -70,6 +74,7 @@ const setUserRule = [
     name: 'surname',
     rules: [
       TYPES.isRequired,
+      TYPES.isString,
       {
         type: TYPES.minMax,
         params: {
@@ -83,9 +88,7 @@ const setUserRule = [
     name: 'password',
     rules: [
       TYPES.isRequired,
-      {
-        type: TYPES.isNumber,
-      },
+      TYPES.isNumber,
       {
         type: TYPES.minMax,
         params: {
@@ -99,7 +102,17 @@ const setUserRule = [
     name: 'cars',
     rules: [
       TYPES.isArray,
+      {
+        type: TYPES.isValidObjectID,
+        params: {
+          name: 'id',
+          rules: [
+            TYPES.isObjectID,
+          ],
+        },
+      },
     ],
   },
 ];
+
 module.exports = { setCarRule, getByIdRule, setUserRule };

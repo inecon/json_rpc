@@ -4,24 +4,18 @@ const helmet = require('helmet');
 const compression = require('compression');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const jsonRouter = require('express-json-rpc-router');
+const { carsRouter, usersRouter } = require('./src/router');
+
 const log4js = require('./src/utils/logger');
-const controller = require('./src/controllers/controller');
-const beforeController = require('./src/controllers/beforeController');
-const afterController = require('./src/controllers/afterController');
 
 const logger = log4js.getLogger();
+
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
-app.use(jsonRouter({
-  methods: controller,
-  beforeMethods: beforeController,
-  afterMethods: afterController,
-  onError(e) {
-    logger.error('Something went wrong - error occurred!', e.toString());
-  },
-}));
+app.use('/cars', carsRouter);
+app.use('/users', usersRouter);
+
 const PORT = process.env.PORT || 3000;
 
 async function start() {
