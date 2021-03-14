@@ -2,17 +2,10 @@ const { Router } = require('express');
 const { User } = require('../models');
 const mapperToResponse = require('../utils/mapper');
 const { validation, rules } = require('../utils/validation');
+const { isError } = require('../utils/helpers');
 
 const router = Router();
 
-function isError(error, res) {
-  if (!(error == null)) {
-    res.status(400);
-    throw new Error(error);
-  }
-  return null;
-}
-// TODO del repeated throw error
 router.get('/', async (req, res) => {
   try {
     const users = await User.find().populate('car');
@@ -50,10 +43,6 @@ router.get('/cars/:id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    // if (error.length) {
-    //   res.status(400);
-    //   throw new Error(error);
-    // }
     const user = await User.find({ cars: { $elemMatch: { _id: `${req.params.id}` } } });
     if (!user.length) { res.status(404); }
     res.send(mapperToResponse({
@@ -75,7 +64,6 @@ router.post('/', async (req, res) => {
     const user = new User({ ...req.body });
     const result = await user.save();
     res.send(mapperToResponse({
-
       data: result,
       error: !result,
       message: result ? '' : 'User not saved to DB',

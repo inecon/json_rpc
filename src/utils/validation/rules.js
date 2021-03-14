@@ -103,14 +103,18 @@ const setUserRule = [
     rules: [
       TYPES.isArray,
       {
-        type: TYPES.isValidObjectID,
-        params: {
-          name: 'id',
-          rules: [
-            TYPES.isObjectID,
-          ],
-        },
+        name: '_id',
+        type: TYPES.isObjectID,
       },
+      // {
+      //   type: TYPES.isValidObjectID,
+      //   params: {
+      //     name: 'id',
+      //     rules: [
+      //       TYPES.isObjectID,
+      //     ],
+      //   },
+      // },
     ],
   },
 ];

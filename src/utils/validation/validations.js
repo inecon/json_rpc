@@ -46,27 +46,27 @@ function isString({ field = '', name }) {
 
 function isNumber({ field = '', name }) {
   if (!(typeof field === 'number')) {
-    return generateErrorMessage(name, 'must be Number`');
+    return generateErrorMessage(name, 'must be Number');
   }
   return null;
 }
 
 function isObjectID({ field = '', name }) {
   if (!new RegExp(reqExp.objectID).test(field)) {
-    return generateErrorMessage(name, 'must be ObjectID`');
+    return generateErrorMessage(name, 'must be ObjectID');
   }
   return null;
 }
 
 function isValidObjectID({ field, name, params: { nam = '', rules = [] } }) {
-  console.log(field);
-  console.log(name);
-  field.some((item) => {
-    console.log(validation);
-    const error = validation(item, rules);
-    console.log(error);
-    return null;
-  });
+  // console.log(field);
+  // console.log(name);
+  // field.some((item) => {
+  //   console.log(validation);
+  //   const error = validation(item, rules);
+  //   console.log(error);
+  //   return null;
+  // });
   // const testField = field == null ? field : String(field);
   // if (testField.length < min || testField.length > max || testField == null) {
   //   return generateErrorMessage(name, `must be between ${min} and ${max}`);

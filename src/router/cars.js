@@ -1,6 +1,9 @@
 const { Router } = require('express');
+const { forEach } = require('p-iteration');
 const { Car, User } = require('../models');
 const mapperToResponse = require('../utils/mapper');
+const { validation, rules } = require('../utils/validation');
+const { isError } = require('../utils/helpers');
 
 const router = Router();
 
@@ -21,6 +24,8 @@ router.get('/', async (req, res) => {
 });
 router.get('/:id', async (req, res) => {
   try {
+    const error = validation(req.params, rules.getByIdRule);
+    isError(error, res);
     const car = await Car.findById(req.params.id);
     res.send(mapperToResponse({
       data: car,
@@ -36,12 +41,14 @@ router.get('/:id', async (req, res) => {
 });
 router.get('/users/:id', async (req, res) => {
   try {
+    const error = validation(req.params, rules.getByIdRule);
+    isError(error, res);
     const carsIds = (await User.findById(req.params.id)).cars;
     const cars = [];
     if (carsIds) {
-      for (const car of carsIds) {
+      await forEach(carsIds, async (car) => {
         cars.push(await Car.findById(car._id));
-      }
+      });
     }
     res.send(mapperToResponse({
       data: cars,
@@ -57,7 +64,8 @@ router.get('/users/:id', async (req, res) => {
 });
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
+    const error = validation({ ...req.body }, rules.setCarRule);
+    isError(error, res);
     const car = new Car({ ...req.body });
     const result = await car.save();
     res.send(mapperToResponse({
@@ -74,6 +82,8 @@ router.post('/', async (req, res) => {
 });
 router.delete('/:id', async (req, res) => {
   try {
+    const error = validation(req.params, rules.getByIdRule);
+    isError(error, res);
     const deletedCar = await Car.findByIdAndDelete(req.params.id);
     res.send(mapperToResponse({
       data: deletedCar,
