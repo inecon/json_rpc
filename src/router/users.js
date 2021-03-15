@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
 });
 router.get('/:_id', async (req, res) => {
   try {
-    console.log(req.params);
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
     const user = await User.findById(req.params._id).populate('car');
