@@ -22,11 +22,11 @@ router.get('/', async (req, res) => {
     }));
   }
 });
-router.get('/:id', async (req, res) => {
+router.get('/:_id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const car = await Car.findById(req.params.id);
+    const car = await Car.findById(req.params._id);
     res.send(mapperToResponse({
       data: car,
       error: !car,
@@ -39,15 +39,16 @@ router.get('/:id', async (req, res) => {
     }));
   }
 });
-router.get('/users/:id', async (req, res) => {
+router.get('/users/:_id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const carsIds = (await User.findById(req.params.id)).cars;
+    const carsIds = (await User.findById(req.params._id)).cars;
     const cars = [];
     if (carsIds) {
       await forEach(carsIds, async (car) => {
-        cars.push(await Car.findById(car._id));
+        const foundedCar = await Car.findById(car._id);
+        if (foundedCar != null) { cars.push(foundedCar); }
       });
     }
     res.send(mapperToResponse({
@@ -80,11 +81,11 @@ router.post('/', async (req, res) => {
     }));
   }
 });
-router.delete('/:id', async (req, res) => {
+router.delete('/:_id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const deletedCar = await Car.findByIdAndDelete(req.params.id);
+    const deletedCar = await Car.findByIdAndDelete(req.params._id);
     res.send(mapperToResponse({
       data: deletedCar,
       error: !deletedCar,

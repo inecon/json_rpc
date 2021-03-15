@@ -21,11 +21,12 @@ router.get('/', async (req, res) => {
     }));
   }
 });
-router.get('/:id', async (req, res) => {
+router.get('/:_id', async (req, res) => {
   try {
+    console.log(req.params);
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const user = await User.findById(req.params.id).populate('car');
+    const user = await User.findById(req.params._id).populate('car');
     if (!user) { res.status(404); }
     res.send(mapperToResponse({
       data: user,
@@ -39,11 +40,11 @@ router.get('/:id', async (req, res) => {
     }));
   }
 });
-router.get('/cars/:id', async (req, res) => {
+router.get('/cars/:_id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const user = await User.find({ cars: { $elemMatch: { _id: `${req.params.id}` } } });
+    const user = await User.find({ cars: { $elemMatch: { _id: `${req.params._id}` } } });
     if (!user.length) { res.status(404); }
     res.send(mapperToResponse({
       data: user,
@@ -75,11 +76,11 @@ router.post('/', async (req, res) => {
     }));
   }
 });
-router.delete('/:id', async (req, res) => {
+router.delete('/:_id', async (req, res) => {
   try {
     const error = validation(req.params, rules.getByIdRule);
     isError(error, res);
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const deletedUser = await User.findByIdAndDelete(req.params._id);
     res.send(mapperToResponse({
       data: deletedUser,
       error: !deletedUser,

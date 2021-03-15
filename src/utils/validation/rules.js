@@ -46,7 +46,7 @@ const setCarRule = [
 ];
 const getByIdRule = [
   {
-    name: 'id',
+    name: '_id',
     rules: [
       TYPES.isRequired,
       {
@@ -102,19 +102,6 @@ const setUserRule = [
     name: 'cars',
     rules: [
       TYPES.isArray,
-      {
-        name: '_id',
-        type: TYPES.isObjectID,
-      },
-      // {
-      //   type: TYPES.isValidObjectID,
-      //   params: {
-      //     name: 'id',
-      //     rules: [
-      //       TYPES.isObjectID,
-      //     ],
-      //   },
-      // },
     ],
   },
 ];

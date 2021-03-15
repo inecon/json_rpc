@@ -5,7 +5,6 @@ const isArray = 'isArray';
 const isNumber = 'isNumber';
 const isString = 'isString';
 const isObjectID = 'isObjectID';
-const isValidObjectID = 'isValidObjectID';
 
 module.exports = {
   isRequired,
@@ -15,5 +14,4 @@ module.exports = {
   isNumber,
   isString,
   isObjectID,
-  isValidObjectID,
 };
