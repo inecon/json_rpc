@@ -30,7 +30,6 @@
     "helmet": "^4.4.1",
     "log4js": "^6.3.0",
     "mongoose": "^5.11.15",
-    "morgan": "^1.10.0",
     "p-iteration": "^1.1.8",
     "rotating-file-stream": "^2.1.5"
   },

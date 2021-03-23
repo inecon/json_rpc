@@ -12,11 +12,12 @@ function validation(data, rules = []) {
         throw new Error(`Rule ${key} wasn't found`);
       }
       // if field is array - check objects in array
-      if (checker.name === 'isArray' && field.length != null) {
+      if (checker.name === 'isArray' && Array.isArray(field)) {
         field.some((carId) => {
           error = validation(carId, rule.getByIdRule);
           return error == null ? null : error;
         });
+        // TODO rewrite
       } else {
         error = checker({
           field,

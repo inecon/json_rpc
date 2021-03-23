@@ -1,6 +1,7 @@
-const validations = require('../utils/validation/validations');
-const TYPES = require('../utils/validation/types');
+const validations = require('./validations');
+const TYPES = require('./types');
 
+// TODO add describe
 test('Should isString', () => {
   expect(validations[TYPES.isString]({ field: 'testString', name: 'testString' })).toBe(null);
 });
